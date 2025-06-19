@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management Tabs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg">
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-200">
+            <button id="tab-users" class="tab-button px-4 py-2 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 focus:outline-none active" data-tab="add-employee">Add Employee</button>
+            <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 focus:outline-none" data-tab="add-bonded">Add Employee Bonded</button>
+            <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 focus:outline-none" data-tab="type-cash-advance">Type of Cash Advance</button>
+            <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 focus:outline-none" data-tab="add-position">Add Position</button>
+            <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 focus:outline-none" data-tab="add-station">Add Station</button>
+        </div>
+
+        <!-- Tab Content Placeholder -->
+        <div class="tab-content p-6">
+            <div id="add-employee" class="tab-pane">
+                <!-- This will redirect to users.php -->
+            </div>
+            <div id="add-bonded" class="tab-pane hidden">
+                <iframe src="add_bonded_employee.php" class="w-full h-[500px] border rounded" frameborder="0"></iframe>
+            </div>
+            <div id="type-cash-advance" class="tab-pane hidden">
+                <iframe src="type_of_cash_advance.php" class="w-full h-[350px] border rounded" frameborder="0"></iframe>
+            </div>
+            <div id="add-position" class="tab-pane hidden">
+                <iframe src="add_position.php" class="w-full h-[350px] border rounded" frameborder="0"></iframe>
+            </div>
+            <div id="add-station" class="tab-pane hidden">
+                <iframe src="add_station.php" class="w-full h-[350px] border rounded" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // If Add Employee tab is clicked, redirect to users.php
+                if (button.getAttribute('data-tab') === 'add-employee') {
+                    window.location.href = 'users.php';
+                    return;
+                }
+                // Remove active classes
+                tabButtons.forEach(btn => btn.classList.remove('text-blue-600', 'border-blue-600', 'active'));
+                tabPanes.forEach(pane => pane.classList.add('hidden'));
+
+                // Add active classes to clicked tab
+                button.classList.add('text-blue-600', 'border-blue-600', 'active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
